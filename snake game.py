@@ -27,8 +27,7 @@ game_in_on=True
 while game_in_on:
     screen.update()
     s1.move_snake()
-    frog_food.move()
-    
+    frog_food.move(need_esc=False)
     
     
     for i in range(1,len(s1.get_snake_segments())):
@@ -57,12 +56,15 @@ while game_in_on:
     if snake_head.ycor() > 300 or snake_head.ycor() < -300:
         snake_head.goto(snake_head.xcor(),-snake_head.ycor())
 
-    if frog_food.xcor() > 250 or frog_food.xcor() < -250:
-        frog_food.goto(-frog_food.xcor(),frog_food.ycor())
+    if frog_food.xcor() > 240 :
+        frog_food.move(need_esc=True,esc_heading = "w")
+    elif frog_food.xcor() < -240:
+        frog_food.move(need_esc=True,esc_heading = "e")
+    elif frog_food.ycor() > 240:  
+        frog_food.move(need_esc=True,esc_heading = "s")
+    elif frog_food.ycor() <-240:
+        frog_food.move(need_esc=True,esc_heading = "n")
     
-    if frog_food.ycor() > 250 or frog_food.ycor() <-250:
-        frog_food.goto(frog_food.xcor(),-frog_food.ycor())
-
     time.sleep(0.1)
     
 
